@@ -3,6 +3,11 @@ package com.firstreactnativeapp;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.firstreactnativeapp.module.BuildVersionPackage;
+import com.firstreactnativeapp.module.ReactWebViewPackage;
+import com.github.alinz.reactnativewebviewbridge.WebViewBridgePackage;
+import com.burnweb.rnwebview.RNWebViewPackage;
+import com.reactnativecommunity.webview.RNCWebViewPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -22,7 +27,12 @@ public class MainApplication extends Application implements ReactApplication {
     @Override
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
-          new MainReactPackage()
+          new MainReactPackage(),
+            new WebViewBridgePackage(),
+            new RNWebViewPackage(),
+            new RNCWebViewPackage(),
+              new ReactWebViewPackage()
+//              new BuildVersionPackage()
       );
     }
 

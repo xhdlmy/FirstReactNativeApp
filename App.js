@@ -1,48 +1,51 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
-
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
+import {WebView} from 'react-native-webview'
+import RCTWebView from './js/WebView';
+
+const {width, height} = Dimensions.get('window');
+
+const LOLLIPOP = 21;
+const LOLLIPOP_MR1 = 22;
+
+var styles = StyleSheet.create({
+    container: {
+        flex:1,
+        backgroundColor:  '#33FF0000'
+    },webView :{
+        height: 320,
+        width : 480,
+    }
+});
+
+
 
 export default class App extends Component {
+
+    constructor(props){
+        super(props);
+    }
+
     render() {
-        return (
-            <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-                <Text>Hello, world!</Text>
-            </View>
-        );
+        console.log("sdk_version", this.props.sdkVersion);
+        console.log("brand", this.props.brand);
+        console.log("model", this.props.model);
+        if(this.props.sdkVersion < LOLLIPOP_MR1){
+            return (
+                <RCTWebView
+                    url = "https://www.baidu.com"
+                    style = {{ width, height }}
+                />
+            );
+        }else{
+            return (
+                <WebView
+                    source = {{uri:"https://cn.bing.com/?mkt=zh-CN&mkt=zh-CN"}}
+                    style = {{ width, height }}
+                />
+            );
+        }
+
     }
 }
-
-// 自定义组件
-// class MyText extends Text {
-//
-//     render() {
-//         return (
-//             <View>
-//                 <Text style={{marginTop: 100, alignContent: 'center'}}>Hello {this.props.myprop}!</Text>
-//             </View>
-//         );
-//     }
-// }
-
-// class MySubText extends MyText {
-//
-//     constructor(props) {
-//         super(props);
-//     }
-//
-//     render() {
-//         return (
-//             <View>
-//                 <Text>Hello {this.props.myprop} {this.props.subprop}!</Text>
-//             </View>
-//         );
-//     }
-// }
 
